@@ -1,0 +1,23 @@
+{
+  "name": "material-ui-mst-table",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "react-scripts": "1.1.4"
+  },
+  "dependencies": {
+    "@material-ui/core": "^1.2.3",
+    "@material-ui/icons": "^1.1.0",
+    "mobx": "^5.0.3",
+    "mobx-react": "^5.2.3",
+    "mobx-state-tree": "^2.2.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
