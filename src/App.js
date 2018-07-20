@@ -51,7 +51,7 @@ class App extends Component {
           id: `${i}`,
           fieldNames: {
             dessert: `Frozen yoghurt ${i}`,
-            calories: Math.round(Math.random() * 1000),
+            calories: Math.round(Math.random() * 100),
             fat: Math.round(Math.random() * 100),
             carbs: Math.round(Math.random() * 100),
             protein: Math.round(Math.random() * 100)
