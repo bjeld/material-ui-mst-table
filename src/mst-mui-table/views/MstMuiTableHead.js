@@ -7,7 +7,15 @@ import Checkbox from "@material-ui/core/Checkbox";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import { observer } from "mobx-react";
 
-const MstMuiTableHead = ({ columnList, numSelected, rowCount, onSelectAllClick, onRequestSort, order, orderBy }) => {
+const MstMuiTableHead = ({
+  columnList,
+  numSelected,
+  rowCount,
+  onSelectAllClick,
+  onRequestSort,
+  order,
+  orderBy
+}) => {
   const createSortHandler = property => event => {
     onRequestSort(event, property);
   };
@@ -19,7 +27,7 @@ const MstMuiTableHead = ({ columnList, numSelected, rowCount, onSelectAllClick, 
           <TableCell padding="checkbox">
             <Checkbox
               indeterminate={numSelected > 0 && numSelected < rowCount}
-              checked={numSelected === rowCount}
+              checked={rowCount > 0 && numSelected === rowCount}
               onChange={onSelectAllClick}
             />
           </TableCell>
@@ -32,7 +40,11 @@ const MstMuiTableHead = ({ columnList, numSelected, rowCount, onSelectAllClick, 
             padding={column.disablePadding ? "none" : "default"}
             sortDirection={orderBy === column.fieldName ? order : false}
           >
-            <Tooltip title="Sort" placement={column.numeric ? "bottom-end" : "bottom-start"} enterDelay={300}>
+            <Tooltip
+              title="Sort"
+              placement={column.numeric ? "bottom-end" : "bottom-start"}
+              enterDelay={300}
+            >
               <TableSortLabel
                 active={orderBy === column.fieldName}
                 direction={order}

@@ -1,9 +1,13 @@
 import React from "react";
 import ButtonAction from "./ButtonAction";
 
-const ButtonActionsView = ({ buttonActions }) => {
+const ButtonActionsView = ({ buttonActions, onButtonAction }) => {
   return buttonActions.map(buttonAction => (
-    <ButtonAction key={`buttonAction${buttonAction.type}`} buttonAction={buttonAction} />
+    <ButtonAction
+      key={`buttonAction${buttonAction.type}`}
+      buttonAction={buttonAction}
+      onButtonAction={onButtonAction}
+    />
   ));
 };
 

@@ -8,7 +8,8 @@ import { RowAction } from "./RowAction";
 const getSorting = (order, orderBy) => {
   return order === "desc"
     ? (a, b) => (b.fieldNames.get(orderBy) < a.fieldNames.get(orderBy) ? -1 : 1)
-    : (a, b) => (a.fieldNames.get(orderBy) < b.fieldNames.get(orderBy) ? -1 : 1);
+    : (a, b) =>
+        a.fieldNames.get(orderBy) < b.fieldNames.get(orderBy) ? -1 : 1;
 };
 
 export const TableModel = types
@@ -20,7 +21,10 @@ export const TableModel = types
     rowActions: types.optional(types.array(RowAction), []),
     filterText: "",
     orderBy: "",
-    order: types.optional(types.enumeration("orderEnum", ["asc", "desc"]), "asc"),
+    order: types.optional(
+      types.enumeration("orderEnum", ["asc", "desc"]),
+      "asc"
+    ),
     title: "Title",
     selectedTitle: "Selected Title",
     page: 0,
@@ -35,7 +39,9 @@ export const TableModel = types
         const indexB = items.findIndex(data => data.id === caller.id);
         const low = Math.min(indexA, indexB);
         const high = Math.max(indexA, indexB);
-        const candidates = items.filter((item, index) => index >= low && index <= high);
+        const candidates = items.filter(
+          (item, index) => index >= low && index <= high
+        );
         candidates.forEach(item => item.updateIsSelected(true));
       }
     },
@@ -80,7 +86,10 @@ export const TableModel = types
     get sorted() {
       return [...self.dataProvider]
         .sort(getSorting(self.order, self.orderBy))
-        .slice(self.page * self.rowsPerPage, self.page * self.rowsPerPage + self.rowsPerPage);
+        .slice(
+          self.page * self.rowsPerPage,
+          self.page * self.rowsPerPage + self.rowsPerPage
+        );
     },
     get selected() {
       return self.dataProvider.filter(data => data.isSelected);

@@ -36,7 +36,14 @@ const styles = theme => ({
   }
 });
 
-const MstMuiTableToolbar = ({ classes, numSelected, bulkActions, buttonActions, onBulkAction, onButtonAction }) => (
+const MstMuiTableToolbar = ({
+  classes,
+  numSelected,
+  bulkActions,
+  buttonActions,
+  onBulkAction,
+  onButtonAction
+}) => (
   <Toolbar
     className={classNames(classes.root, {
       [classes.highlight]: numSelected > 0
@@ -48,14 +55,20 @@ const MstMuiTableToolbar = ({ classes, numSelected, bulkActions, buttonActions, 
           {numSelected} selected
         </Typography>
       ) : (
-        <ButtonActionsView buttonActions={buttonActions} />
+        <ButtonActionsView
+          buttonActions={buttonActions}
+          onButtonAction={onButtonAction}
+        />
       )}
     </div>
     <div className={classes.spacer} />
 
     <div className={classes.actions}>
       {numSelected > 0 ? (
-        <BulkActionsView bulkActions={bulkActions} onBulkAction={onBulkAction} />
+        <BulkActionsView
+          bulkActions={bulkActions}
+          onBulkAction={onBulkAction}
+        />
       ) : (
         <Tooltip title="Filter list">
           <IconButton aria-label="Filter list">

@@ -19,7 +19,13 @@ class App extends Component {
       orderBy: "fat",
       order: "desc",
       bulkActions: [BulkAction.create({ type: "Delete", multiple: true })],
-      buttonActions: [ButtonAction.create({ type: "Create", color: "primary", variant: "outlined" })],
+      buttonActions: [
+        ButtonAction.create({
+          type: "create",
+          color: "primary",
+          variant: "raised"
+        })
+      ],
       rowsPerPageOptions: [10, 20, 30, 40, 50, 60],
       rowsPerPage: 20,
       columnList: ColumnList.create({
@@ -35,10 +41,16 @@ class App extends Component {
               />
             );
           }),
-          columnBuilder("calories", "Calories", value => value, { numeric: true }),
+          columnBuilder("calories", "Calories", value => value, {
+            numeric: true
+          }),
           columnBuilder("fat", "Fat (g)", value => value, { numeric: true }),
-          columnBuilder("carbs", "Carbs (g)", value => value, { numeric: true }),
-          columnBuilder("protein", "Protein (g)", value => value, { numeric: true })
+          columnBuilder("carbs", "Carbs (g)", value => value, {
+            numeric: true
+          }),
+          columnBuilder("protein", "Protein (g)", value => value, {
+            numeric: true
+          })
         ]
       })
     });
@@ -46,22 +58,24 @@ class App extends Component {
     const data = [];
 
     for (let i = 0; i < 100; i++) {
-      data.push(
-        Data.create({
-          id: `${i}`,
-          fieldNames: {
-            dessert: `Frozen yoghurt ${i}`,
-            calories: Math.round(Math.random() * 100),
-            fat: Math.round(Math.random() * 100),
-            carbs: Math.round(Math.random() * 100),
-            protein: Math.round(Math.random() * 100)
-          }
-        })
-      );
+      data.push(this.createDummyData(`${i}`));
     }
 
     this.tableModel.updateDataProvider(data);
   }
+
+  createDummyData = id => {
+    return Data.create({
+      id,
+      fieldNames: {
+        dessert: `Frozen yoghurt ${id}`,
+        calories: Math.round(Math.random() * 100),
+        fat: Math.round(Math.random() * 100),
+        carbs: Math.round(Math.random() * 100),
+        protein: Math.round(Math.random() * 100)
+      }
+    });
+  };
 
   handleBulkAction = bulkAction => {
     switch (bulkAction.type) {
@@ -74,11 +88,28 @@ class App extends Component {
     }
   };
 
+  handleButtonAction = buttonAction => {
+    switch (buttonAction.type) {
+      case "create":
+        this.tableModel.add(
+          this.createDummyData(`${this.tableModel.numRowCount}`)
+        );
+        break;
+
+      default:
+        break;
+    }
+  };
+
   render() {
     return (
       <Fragment>
         <Typography variant="title">Nutrition</Typography>
-        <MstMuiTable tableModel={this.tableModel} onBulkAction={this.handleBulkAction} />
+        <MstMuiTable
+          tableModel={this.tableModel}
+          onBulkAction={this.handleBulkAction}
+          onButtonAction={this.handleButtonAction}
+        />
       </Fragment>
     );
   }

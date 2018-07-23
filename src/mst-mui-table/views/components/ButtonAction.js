@@ -1,9 +1,15 @@
 import React from "react";
 import { Button } from "@material-ui/core";
 
-const ButtonAction = ({ buttonAction }) => {
+const ButtonAction = ({ buttonAction, onButtonAction }) => {
+  const handleClick = e => onButtonAction(buttonAction);
+
   return (
-    <Button color={buttonAction.color} variant={buttonAction.variant}>
+    <Button
+      color={buttonAction.color}
+      variant={buttonAction.variant}
+      onClick={handleClick}
+    >
       {buttonAction.type}
     </Button>
   );
