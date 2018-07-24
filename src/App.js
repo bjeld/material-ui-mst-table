@@ -18,12 +18,10 @@ class App extends Component {
     this.tableModel = TableModel.create({
       orderBy: "fat",
       order: "desc",
-      bulkActions: [BulkAction.create({ type: "Delete", multiple: true })],
+      bulkActions: [BulkAction.create({ type: "delete", multiple: true })],
       buttonActions: [
         ButtonAction.create({
-          type: "create",
-          color: "primary",
-          variant: "raised"
+          type: "create"
         })
       ],
       rowsPerPageOptions: [10, 20, 30, 40, 50, 60],
@@ -36,6 +34,7 @@ class App extends Component {
               <TextEditing
                 value={value}
                 onValueChanged={newValue => {
+                  // optimistic update
                   data.setFieldValue("dessert", newValue);
                 }}
               />
@@ -91,9 +90,7 @@ class App extends Component {
   handleButtonAction = buttonAction => {
     switch (buttonAction.type) {
       case "create":
-        this.tableModel.add(
-          this.createDummyData(`${this.tableModel.numRowCount}`)
-        );
+        this.tableModel.add(this.createDummyData(`${this.tableModel.numRowCount}`));
         break;
 
       default:

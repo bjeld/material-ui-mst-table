@@ -10,7 +10,8 @@
     "@material-ui/icons": "^1.1.0",
     "mobx": "^5.0.3",
     "mobx-react": "^5.2.3",
-    "mobx-state-tree": "^2.2.0",
+    "mobx-state-tree": "^3.0.0",
+    "prettier": "^1.13.7",
     "react": "^16.4.1",
     "react-dom": "^16.4.1"
   },

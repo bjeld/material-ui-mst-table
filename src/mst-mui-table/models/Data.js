@@ -4,8 +4,8 @@ let prevSelectedDataId;
 
 export const Data = types
   .model("Data", {
-    id: types.identifier(),
-    fieldNames: types.map(types.frozen),
+    id: types.identifier,
+    fieldNames: types.map(types.frozen()),
     isSelected: false
   })
   .actions(self => ({
@@ -27,5 +27,8 @@ export const Data = types
      */
     setFieldValue(key, value) {
       self.fieldNames.set(key, value);
+    },
+    getFieldValue(key) {
+      return self.fieldNames.get(key);
     }
   }));

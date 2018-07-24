@@ -23,7 +23,7 @@ export const Column = types
      * If true, the column header can be clicked to sort the content
      */
     sortable: types.boolean,
-    columnCountData: types.maybe(types.array(types.frozen))
+    columnCountData: types.array(types.frozen())
   })
   .volatile(self => ({
     cellRenderer: value => value
@@ -45,7 +45,7 @@ export const columnBuilder = (fieldName, fieldLabel, cellRendererFunc, options =
   const sortable = options.hasOwnProperty("sortable") ? options.sortable : false;
   const columnCountData = options.hasOwnProperty("columnCountData")
     ? options.columnCountData
-    : null;
+    : undefined;
   const column = Column.create({
     fieldName,
     fieldLabel,
