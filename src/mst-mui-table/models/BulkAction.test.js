@@ -4,7 +4,7 @@ let bulkAtion;
 
 beforeEach(() => {
   bulkAtion = BulkAction.create({
-    type: "Delete",
+    type: "delete",
     tooltip: "Delete selected",
     multiple: false
   });
@@ -12,7 +12,7 @@ beforeEach(() => {
 
 describe("\ninitializong", () => {
   it("has correct data after initializong", () => {
-    expect(bulkAtion.type).toBe("Delete");
+    expect(bulkAtion.type).toBe("delete");
     expect(bulkAtion.multiple).toBe(false);
   });
 });

@@ -24,8 +24,6 @@ class App extends Component {
           type: "create"
         })
       ],
-      rowsPerPageOptions: [10, 20, 30, 40, 50, 60],
-      rowsPerPage: 20,
       columnList: ColumnList.create({
         showCheckbox: true,
         columns: [
@@ -78,7 +76,7 @@ class App extends Component {
 
   handleBulkAction = bulkAction => {
     switch (bulkAction.type) {
-      case "Delete":
+      case "delete":
         this.tableModel.destroyItems(this.tableModel.selected);
         break;
 

@@ -33,5 +33,8 @@ export const ColumnList = types
     },
     get numHideableColumns() {
       return self.hideableColumns.length;
+    },
+    get hasHideableColumns() {
+      return self.numAllColumns > 0;
     }
   }));

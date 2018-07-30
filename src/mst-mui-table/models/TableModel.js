@@ -20,12 +20,18 @@ export const TableModel = types
     rowActions: types.array(RowAction),
     filterText: "",
     orderBy: "",
-    order: types.optional(types.enumeration("orderEnum", ["asc", "desc"]), "asc"),
+    order: types.enumeration("orderEnum", ["asc", "desc"]),
     title: "Title",
     selectedTitle: "Selected Title",
     page: 0,
-    rowsPerPageOptions: types.optional(types.array(types.number), [10, 25, 50]),
-    rowsPerPage: 10
+    rowsPerPageOptions: types.array(types.number),
+    rowsPerPage: types.number
+  })
+  .preProcessSnapshot(snapshot => {
+    const order = snapshot.order || "asc";
+    const rowsPerPageOptions = snapshot.rowsPerPageOptions || [10, 20, 30, 40, 50];
+    const rowsPerPage = snapshot.rowsPerPage || 10;
+    return { ...snapshot, order, rowsPerPage, rowsPerPageOptions };
   })
   .actions(self => ({
     shiftSelect(caller, prevSelectedDataId) {
