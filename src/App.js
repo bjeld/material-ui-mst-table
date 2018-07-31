@@ -22,7 +22,8 @@ class App extends Component {
       bulkActions: [BulkAction.create({ type: "delete", multiple: true })],
       buttonActions: [
         ButtonAction.create({
-          type: "create"
+          type: "create",
+          variant: "outlined"
         })
       ],
       columnList: ColumnList.create({

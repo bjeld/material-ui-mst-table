@@ -75,6 +75,7 @@ const MstMuiTableToolbar = ({
         {numSelected > 0 ? null : (
           <React.Fragment>
             <ButtonActionsView buttonActions={buttonActions} onButtonAction={onButtonAction} />
+            <div style={{ width: 12 }} />
             <Tooltip title="Filter list">
               <IconButton aria-label="Filter list">
                 <FilterListIcon />
