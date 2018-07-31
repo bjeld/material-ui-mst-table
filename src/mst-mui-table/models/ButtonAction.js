@@ -20,7 +20,7 @@ export const ButtonAction = types
   })
   .preProcessSnapshot(snapshot => {
     const variant = snapshot.variant || "raised";
-    const color = snapshot.color || "default";
+    const color = snapshot.color || "secondary";
     const size = snapshot.size || "medium";
     return { ...snapshot, variant, color, size };
   });
