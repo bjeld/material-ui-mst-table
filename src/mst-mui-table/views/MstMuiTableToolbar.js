@@ -12,8 +12,6 @@ import BulkActionsView from "./components/BulkActionsView";
 import ButtonActionsView from "./components/ButtonActionsView";
 import Divider from "@material-ui/core/Divider";
 
-import Search from "./components/Search";
-
 const styles = theme => ({
   root: {
     paddingRight: theme.spacing.unit,
@@ -51,7 +49,8 @@ const MstMuiTableToolbar = ({
   bulkActions,
   buttonActions,
   onBulkAction,
-  onButtonAction
+  onButtonAction,
+  slotForLeftToolbarArea
 }) => (
   <React.Fragment>
     <Toolbar
@@ -68,7 +67,7 @@ const MstMuiTableToolbar = ({
             <BulkActionsView bulkActions={bulkActions} onBulkAction={onBulkAction} />
           </React.Fragment>
         ) : (
-          <Search />
+          slotForLeftToolbarArea
         )}
       </div>
 

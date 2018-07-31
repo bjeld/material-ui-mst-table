@@ -10,6 +10,7 @@ import { columnBuilder } from "./mst-mui-table/models/Column";
 import TextEditing from "./mst-mui-table/inline/text-editing/TextEditing";
 import { observer } from "mobx-react";
 import { Typography } from "@material-ui/core";
+import Search from "./mst-mui-table/views/components/Search";
 
 class App extends Component {
   constructor(props) {
@@ -99,11 +100,12 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <Typography variant="title">Nutrition</Typography>
+        <Typography variant="title">{`${this.tableModel.numRowCount} Nutrition items`}</Typography>
         <MstMuiTable
           tableModel={this.tableModel}
           onBulkAction={this.handleBulkAction}
           onButtonAction={this.handleButtonAction}
+          slotForLeftToolbarArea={<Search />}
         />
       </Fragment>
     );

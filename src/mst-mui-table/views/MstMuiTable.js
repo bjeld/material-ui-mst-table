@@ -20,7 +20,13 @@ const styles = theme => ({
   }
 });
 
-const MstMuiTable = ({ classes, tableModel, onBulkAction, onButtonAction }) => {
+const MstMuiTable = ({
+  classes,
+  tableModel,
+  onBulkAction,
+  onButtonAction,
+  slotForLeftToolbarArea
+}) => {
   const handleRequestSort = (event, property) => {
     tableModel.updateOrderBy(property);
   };
@@ -43,9 +49,9 @@ const MstMuiTable = ({ classes, tableModel, onBulkAction, onButtonAction }) => {
 
   if (!tableModel.rowsPerPageOptions.includes(tableModel.rowsPerPage)) {
     throw new Error(
-      `rowsPerPage value of ${tableModel.rowsPerPage} does not match one of the values in rowsPerPageOptions ${
-        tableModel.rowsPerPageOptions
-      }`
+      `rowsPerPage value of ${
+        tableModel.rowsPerPage
+      } does not match one of the values in rowsPerPageOptions ${tableModel.rowsPerPageOptions}`
     );
   }
 
@@ -57,6 +63,7 @@ const MstMuiTable = ({ classes, tableModel, onBulkAction, onButtonAction }) => {
         buttonActions={tableModel.buttonActions}
         onBulkAction={onBulkAction}
         onButtonAction={onButtonAction}
+        slotForLeftToolbarArea={slotForLeftToolbarArea}
       />
       <Table className={classes.table}>
         <MstMuiTableHead
@@ -70,7 +77,11 @@ const MstMuiTable = ({ classes, tableModel, onBulkAction, onButtonAction }) => {
         />
         <TableBody>
           {tableModel.sorted.map(data => (
-            <MstMuiTableRow data={data} key={`MstMuiTableRow_${data.id}`} columnList={tableModel.columnList} />
+            <MstMuiTableRow
+              data={data}
+              key={`MstMuiTableRow_${data.id}`}
+              columnList={tableModel.columnList}
+            />
           ))}
         </TableBody>
       </Table>
