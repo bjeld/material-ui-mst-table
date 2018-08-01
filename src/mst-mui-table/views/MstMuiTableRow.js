@@ -36,7 +36,7 @@ class MstMuiTableRow extends React.Component {
             column={column}
             value={data.fieldNames.get(column.fieldName)}
             data={data}
-            padding={i === 0 ? "none" : "default"}
+            padding={columnList.showCheckbox && i === 0 ? "none" : "default"}
           />
         ))}
       </TableRow>
