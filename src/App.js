@@ -27,7 +27,7 @@ class App extends Component {
         })
       ],
       columnList: ColumnList.create({
-        showCheckbox: true,
+        showCheckbox: false,
         columns: [
           columnBuilder("dessert", "Dessert (100g serving)", (value, data) => {
             return (

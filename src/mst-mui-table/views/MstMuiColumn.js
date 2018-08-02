@@ -4,9 +4,13 @@ import TableCell from "@material-ui/core/TableCell";
 
 class MstMuiColumn extends React.Component {
   render() {
-    const { column, value, data } = this.props;
+    const { column, value, data, ...other } = this.props;
 
-    return <TableCell numeric={column.numeric}>{column.renderer(value, data)}</TableCell>;
+    return (
+      <TableCell numeric={column.numeric} {...other}>
+        {column.renderer(value, data)}
+      </TableCell>
+    );
   }
 }
 

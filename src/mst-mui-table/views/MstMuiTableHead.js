@@ -33,11 +33,11 @@ const MstMuiTableHead = ({
           </TableCell>
         )}
 
-        {columnList.visibleColumns.map(column => (
+        {columnList.visibleColumns.map((column, i) => (
           <TableCell
             key={`MstMuiTableHead_${column.fieldName}`}
             numeric={column.numeric}
-            padding={column.disablePadding ? "none" : "default"}
+            padding={columnList.showCheckbox && i === 0 ? "none" : "default"}
             sortDirection={orderBy === column.fieldName ? order : false}
           >
             <Tooltip
