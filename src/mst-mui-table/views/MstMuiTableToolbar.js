@@ -1,8 +1,5 @@
 import React from "react";
-import FilterListIcon from "@material-ui/icons/FilterList";
-import IconButton from "@material-ui/core/IconButton";
 import Toolbar from "@material-ui/core/Toolbar";
-import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import classNames from "classnames";
 import { lighten } from "@material-ui/core/styles/colorManipulator";
@@ -11,6 +8,7 @@ import { withStyles } from "@material-ui/core/styles";
 import BulkActionsView from "./components/BulkActionsView";
 import ButtonActionsView from "./components/ButtonActionsView";
 import Divider from "@material-ui/core/Divider";
+import PopoverFilter from "./components/PopoverFilter";
 
 const styles = theme => ({
   root: {
@@ -50,7 +48,8 @@ const MstMuiTableToolbar = ({
   buttonActions,
   onBulkAction,
   onButtonAction,
-  slotForLeftToolbarArea
+  slotForLeftToolbarArea,
+  slotForFilterContent
 }) => (
   <React.Fragment>
     <Toolbar
@@ -76,11 +75,7 @@ const MstMuiTableToolbar = ({
           <React.Fragment>
             <ButtonActionsView buttonActions={buttonActions} onButtonAction={onButtonAction} />
             <div style={{ width: 12 }} />
-            <Tooltip title="Filter list">
-              <IconButton aria-label="Filter list">
-                <FilterListIcon />
-              </IconButton>
-            </Tooltip>
+            {slotForFilterContent && <PopoverFilter>{slotForFilterContent}</PopoverFilter>}
           </React.Fragment>
         )}
       </div>

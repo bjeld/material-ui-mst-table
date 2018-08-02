@@ -25,7 +25,8 @@ const MstMuiTable = ({
   tableModel,
   onBulkAction,
   onButtonAction,
-  slotForLeftToolbarArea
+  slotForLeftToolbarArea,
+  slotForFilterContent
 }) => {
   const handleRequestSort = (event, property) => {
     tableModel.updateOrderBy(property);
@@ -64,6 +65,7 @@ const MstMuiTable = ({
         onBulkAction={onBulkAction}
         onButtonAction={onButtonAction}
         slotForLeftToolbarArea={slotForLeftToolbarArea}
+        slotForFilterContent={slotForFilterContent}
       />
       <Table className={classes.table}>
         <MstMuiTableHead

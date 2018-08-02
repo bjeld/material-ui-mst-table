@@ -107,6 +107,7 @@ class App extends Component {
           onBulkAction={this.handleBulkAction}
           onButtonAction={this.handleButtonAction}
           slotForLeftToolbarArea={<Search />}
+          slotForFilterContent={<div>filter</div>}
         />
       </Fragment>
     );
