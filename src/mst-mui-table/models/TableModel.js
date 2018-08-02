@@ -4,6 +4,7 @@ import { Data } from "./Data";
 import { BulkAction } from "./BulkAction";
 import { ButtonAction } from "./ButtonAction";
 import { RowAction } from "./RowAction";
+import { Filter } from "./Filter";
 
 const getSorting = (order, orderBy) => {
   return order === "desc"
@@ -25,7 +26,8 @@ export const TableModel = types
     selectedTitle: "Selected Title",
     page: 0,
     rowsPerPageOptions: types.array(types.number),
-    rowsPerPage: types.number
+    rowsPerPage: types.number,
+    filters: types.array(Filter)
   })
   .preProcessSnapshot(snapshot => {
     const order = snapshot.order || "asc";
@@ -80,22 +82,50 @@ export const TableModel = types
     },
     deselectAll() {
       self.dataProvider.forEach(data => (data.isSelected = false));
+    },
+    /**
+     * A filter is just a function that return true or false
+     * based on conditions that plays well with the Data fields.
+     *
+     * @param {*} filter
+     */
+    addFilter(filter) {
+      self.filters.push(filter);
+    },
+    removeFilter(id) {
+      const filter = self.filters.find(filter => filter.id === id);
+      self.filters.remove(filter);
     }
   }))
   .views(self => ({
+    get filtered() {
+      let candidates = [...self.dataProvider];
+      candidates = candidates.filter(data => {
+        let result = true;
+
+        self.filters.forEach(filter => {
+          if (!filter.test(data)) {
+            result = false;
+          }
+        });
+
+        return result;
+      });
+      return candidates;
+    },
     get sorted() {
-      return [...self.dataProvider]
+      return self.filtered
         .sort(getSorting(self.order, self.orderBy))
         .slice(self.page * self.rowsPerPage, self.page * self.rowsPerPage + self.rowsPerPage);
     },
     get selected() {
-      return self.dataProvider.filter(data => data.isSelected);
+      return self.filtered.filter(data => data.isSelected);
     },
     get numSelected() {
       return self.selected.length;
     },
     get numRowCount() {
-      return self.dataProvider.length;
+      return self.filtered.length;
     },
     get hasSelected() {
       return self.selected.length > 0;

@@ -26,7 +26,7 @@ export const Column = types
     columnCountData: types.array(types.frozen())
   })
   .volatile(self => ({
-    cellRenderer: value => value
+    renderer: value => value
   }))
   .actions(self => ({
     setRenderer(func) {
