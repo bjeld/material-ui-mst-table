@@ -106,7 +106,7 @@ class App extends React.Component {
 
   createDummyData = id => {
     return Data.create({
-      id,
+      id: `${Math.ceil(Math.random() * 100000000)}`,
       fieldNames: {
         dessert: `Frozen yoghurt ${id}`,
         calories: Math.round(Math.random() * 100),

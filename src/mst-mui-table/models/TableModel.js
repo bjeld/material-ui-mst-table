@@ -138,5 +138,8 @@ export const TableModel = types
     },
     get hasButtonActions() {
       return self.buttonActions.length > 0;
+    },
+    get hasFilter() {
+      return self.filtered.length < self.dataProvider.length;
     }
   }));

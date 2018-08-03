@@ -62,6 +62,7 @@ const MstMuiTable = ({
         numSelected={tableModel.numSelected}
         bulkActions={tableModel.bulkActions}
         buttonActions={tableModel.buttonActions}
+        hasFilter={tableModel.hasFilter}
         onBulkAction={onBulkAction}
         onButtonAction={onButtonAction}
         slotForLeftToolbarArea={slotForLeftToolbarArea}

@@ -48,6 +48,7 @@ const MstMuiTableToolbar = ({
   buttonActions,
   onBulkAction,
   onButtonAction,
+  hasFilter,
   slotForLeftToolbarArea,
   slotForFilterContent
 }) => (
@@ -75,7 +76,9 @@ const MstMuiTableToolbar = ({
           <React.Fragment>
             <ButtonActionsView buttonActions={buttonActions} onButtonAction={onButtonAction} />
             <div style={{ width: 12 }} />
-            {slotForFilterContent && <PopoverFilter>{slotForFilterContent}</PopoverFilter>}
+            {slotForFilterContent && (
+              <PopoverFilter hasFilter={hasFilter}>{slotForFilterContent}</PopoverFilter>
+            )}
           </React.Fragment>
         )}
       </div>
