@@ -6,8 +6,8 @@ import { columnBuilder } from "./mst-mui-table/models/Column";
 import { ColumnList } from "./mst-mui-table/models/ColumnList";
 import { Filter } from "./mst-mui-table/models/Filter";
 import { Data } from "./mst-mui-table/models/Data";
-import { decorate, observable, action } from "mobx";
 import { observer } from "mobx-react";
+import { action, observable, decorate } from "mobx";
 import { TableModel } from "./mst-mui-table/models/TableModel";
 import { Typography } from "@material-ui/core";
 import MstMuiTable from "./mst-mui-table/views/MstMuiTable";
@@ -33,10 +33,10 @@ const CaloriesFilter = ({ checked, onCaloriesFilterChange }) => {
 };
 
 class App extends React.Component {
-  fatFilterChecked = true;
+  fatFilterChecked = false;
   fatFilterCheckedUpdate = value => (this.fatFilterChecked = value);
 
-  caloriesFilterChecked = true;
+  caloriesFilterChecked = false;
   caloriesFilterCheckedUpdate = value => (this.caloriesFilterChecked = value);
 
   createFatFilter = () => {
@@ -49,6 +49,15 @@ class App extends React.Component {
     const caloriesFilter = Filter.create({ id: "caloriesFilter" });
     caloriesFilter.setRules(data => data.getFieldValue("calories") < 50);
     return caloriesFilter;
+  };
+
+  createSearchFilter = () => {
+    const searchFilter = Filter.create({ id: "searchFilter" });
+    searchFilter.setRules((data, searchValue) => {
+      const dessert = data.getFieldValue("dessert").toLowerCase();
+      return dessert.toLowerCase().indexOf(searchValue) > -1;
+    });
+    return searchFilter;
   };
 
   constructor(props) {
@@ -92,8 +101,9 @@ class App extends React.Component {
       })
     });
 
-    this.tableModel.addFilter(this.createFatFilter());
-    this.tableModel.addFilter(this.createCaloriesFilter());
+    //this.tableModel.addFilter(this.createFatFilter());
+    //this.tableModel.addFilter(this.createCaloriesFilter());
+    this.tableModel.addFilter(this.createSearchFilter());
 
     const data = [];
 
@@ -156,36 +166,51 @@ class App extends React.Component {
     }
   };
 
+  handleSeachValueChange = value => {
+    this.tableModel.searchValueUpdate(value);
+  };
+
   render() {
     return (
-      <React.Fragment>
-        <Typography variant="title">{`${this.tableModel.numRowCount} Nutrition items`}</Typography>
-        <MstMuiTable
-          tableModel={this.tableModel}
-          onBulkAction={this.handleBulkAction}
-          onButtonAction={this.handleButtonAction}
-          slotForLeftToolbarArea={<Search />}
-          slotForFilterContent={
-            <React.Fragment>
-              <FatFilter
-                checked={this.fatFilterChecked}
-                onFatFilterChange={this.handleFatFilterChange}
+      <div style={{ display: "flex", justifyContent: "center", paddingTop: 24 }}>
+        <div style={{ width: 940 }}>
+          <Typography variant="title">{`${
+            this.tableModel.numRowCount
+          } Nutrition items`}</Typography>
+          <MstMuiTable
+            tableModel={this.tableModel}
+            onBulkAction={this.handleBulkAction}
+            onButtonAction={this.handleButtonAction}
+            slotForLeftToolbarArea={
+              <Search
+                value={this.tableModel.searchValue}
+                onValueChange={this.handleSeachValueChange}
               />
-              <CaloriesFilter
-                checked={this.caloriesFilterChecked}
-                onCaloriesFilterChange={this.handleCaloriesFilterChange}
-              />
-            </React.Fragment>
-          }
-        />
-      </React.Fragment>
+            }
+            slotForFilterContent={
+              <React.Fragment>
+                <FatFilter
+                  checked={this.fatFilterChecked}
+                  onFatFilterChange={this.handleFatFilterChange}
+                />
+                <CaloriesFilter
+                  checked={this.caloriesFilterChecked}
+                  onCaloriesFilterChange={this.handleCaloriesFilterChange}
+                />
+              </React.Fragment>
+            }
+          />
+        </div>
+      </div>
     );
   }
 }
 
 decorate(App, {
   fatFilterChecked: observable,
-  fatFilterCheckedUpdate: action
+  caloriesFilterChecked: observable,
+  fatFilterCheckedUpdate: action,
+  caloriesFilterCheckedUpdate: action
 });
 
 export default observer(App);

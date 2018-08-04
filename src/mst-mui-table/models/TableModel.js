@@ -19,7 +19,7 @@ export const TableModel = types
     bulkActions: types.array(BulkAction),
     buttonActions: types.array(ButtonAction),
     rowActions: types.array(RowAction),
-    filterText: "",
+    searchValue: "",
     orderBy: "",
     order: types.enumeration("orderEnum", ["asc", "desc"]),
     title: "Title",
@@ -64,8 +64,8 @@ export const TableModel = types
         destroy(item);
       });
     },
-    updateFilter(value) {
-      self.filterText = value;
+    searchValueUpdate(value) {
+      self.searchValue = value;
     },
     updateOrderBy(value) {
       if (self.orderBy === value) {
@@ -104,7 +104,7 @@ export const TableModel = types
         let result = true;
 
         self.filters.forEach(filter => {
-          if (!filter.test(data)) {
+          if (!filter.test(data, self.searchValue)) {
             result = false;
           }
         });

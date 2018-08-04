@@ -8,7 +8,7 @@ export const Filter = types
     setRules(func) {
       self.rules = func;
     },
-    test(data) {
-      return self.rules(data);
+    test(data, searchValue) {
+      return self.rules(data, searchValue);
     }
   }));
