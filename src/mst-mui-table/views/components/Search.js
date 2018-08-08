@@ -13,7 +13,7 @@ class Search extends React.Component {
         onChange={this.handleChange}
         fullWidth
         id="material-ui-mst-table-search"
-        placeholder="search for any column value"
+        placeholder="Search on dessert name"
         disableUnderline
         startAdornment={
           <InputAdornment position="start">

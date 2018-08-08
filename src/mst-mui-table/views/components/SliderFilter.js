@@ -5,8 +5,7 @@ import Typography from "@material-ui/core/Typography";
 
 const styles = {
   root: {
-    width: 300,
-    padding: 12
+    width: 300
   }
 };
 

@@ -1,45 +1,38 @@
 import { types } from "mobx-state-tree";
 
-export const StringFilter = types
-  .model("StringFilter", {
+const createFilterable = () => {
+  return types.model({}).actions(self => ({
+    setRules(func) {
+      self.rules = func;
+    },
+    update(value) {
+      self.value = value;
+    }
+  }));
+};
+
+export const StringFilter = types.compose(
+  types.model("StringFilter", {
     id: types.string,
     value: types.string
-  })
-  .actions(self => ({
-    setRules(func) {
-      self.rules = func;
-    },
-    update(value) {
-      self.value = value;
-    }
-  }));
+  }),
+  createFilterable()
+);
 
-export const NumberFilter = types
-  .model("NumberFilter", {
+export const NumberFilter = types.compose(
+  types.model("NumberFilter", {
     id: types.string,
     value: types.number
-  })
-  .actions(self => ({
-    setRules(func) {
-      self.rules = func;
-    },
-    update(value) {
-      self.value = value;
-    }
-  }));
+  }),
+  createFilterable()
+);
 
-export const BooleanFilter = types
-  .model("BooleanFilter", {
+export const BooleanFilter = types.compose(
+  types.model("BooleanFilter", {
     id: types.string,
     value: types.boolean
-  })
-  .actions(self => ({
-    setRules(func) {
-      self.rules = func;
-    },
-    update(value) {
-      self.value = value;
-    }
-  }));
+  }),
+  createFilterable()
+);
 
 export const Filter = types.union(StringFilter, NumberFilter, BooleanFilter);
