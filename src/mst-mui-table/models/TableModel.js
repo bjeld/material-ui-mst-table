@@ -19,7 +19,6 @@ export const TableModel = types
     bulkActions: types.array(BulkAction),
     buttonActions: types.array(ButtonAction),
     rowActions: types.array(RowAction),
-    searchValue: "",
     orderBy: "",
     order: types.enumeration("orderEnum", ["asc", "desc"]),
     title: "Title",
@@ -38,7 +37,7 @@ export const TableModel = types
   .actions(self => ({
     shiftSelect(caller, prevSelectedDataId) {
       if (prevSelectedDataId) {
-        const items = self.sorted;
+        const items = self.filtered;
         const indexA = items.findIndex(data => data.id === prevSelectedDataId);
         const indexB = items.findIndex(data => data.id === caller.id);
         const low = Math.min(indexA, indexB);
@@ -63,9 +62,6 @@ export const TableModel = types
       items.forEach(item => {
         destroy(item);
       });
-    },
-    searchValueUpdate(value) {
-      self.searchValue = value;
     },
     updateOrderBy(value) {
       if (self.orderBy === value) {
@@ -92,8 +88,12 @@ export const TableModel = types
     addFilter(filter) {
       self.filters.push(filter);
     },
-    removeFilter(id) {
+    getFilter(id) {
       const filter = self.filters.find(filter => filter.id === id);
+      return filter;
+    },
+    removeFilter(id) {
+      const filter = self.getFilter(id);
       self.filters.remove(filter);
     }
   }))
@@ -104,9 +104,7 @@ export const TableModel = types
         let result = true;
 
         self.filters.forEach(filter => {
-          if (!filter.test(data, self.searchValue)) {
-            result = false;
-          }
+          result = filter.rules(data, filter.value);
         });
 
         return result;

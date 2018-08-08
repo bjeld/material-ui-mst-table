@@ -12,7 +12,7 @@ export const Data = types
     updateIsSelected(value, shiftKey) {
       self.isSelected = value;
 
-      if (hasParent(self, 2) && shiftKey) {
+      if (value && hasParent(self, 2) && shiftKey) {
         getParent(self, 2).shiftSelect(self, prevSelectedDataId);
       }
 

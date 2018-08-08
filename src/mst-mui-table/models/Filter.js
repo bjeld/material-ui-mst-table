@@ -2,13 +2,14 @@ import { types } from "mobx-state-tree";
 
 export const Filter = types
   .model("Filter", {
-    id: types.string
+    id: types.string,
+    value: ->
   })
   .actions(self => ({
     setRules(func) {
       self.rules = func;
     },
-    test(data, searchValue) {
-      return self.rules(data, searchValue);
+    update(value) {
+      self.value = value;
     }
   }));
