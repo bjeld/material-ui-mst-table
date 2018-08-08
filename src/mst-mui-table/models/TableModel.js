@@ -104,9 +104,10 @@ export const TableModel = types
         let result = true;
 
         self.filters.forEach(filter => {
-          result = filter.rules(data, filter.value);
+          if (filter.rules(data, filter.value) === false) {
+            result = false;
+          }
         });
-
         return result;
       });
       return candidates;

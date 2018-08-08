@@ -1,25 +1,24 @@
 import React from "react";
 
-import { BulkAction } from "./mst-mui-table/models/BulkAction";
-import { ButtonAction } from "./mst-mui-table/models/ButtonAction";
-import { columnBuilder } from "./mst-mui-table/models/Column";
-import { ColumnList } from "./mst-mui-table/models/ColumnList";
-import { Filter } from "./mst-mui-table/models/Filter";
-import { Data } from "./mst-mui-table/models/Data";
-import { observer } from "mobx-react";
-import { action, observable, decorate } from "mobx";
-import { TableModel } from "./mst-mui-table/models/TableModel";
-import { Typography } from "@material-ui/core";
 import MstMuiTable from "./mst-mui-table/views/MstMuiTable";
 import Search from "./mst-mui-table/views/components/Search";
+import SliderFilter from "./mst-mui-table/views/components/SliderFilter";
 import Switch from "@material-ui/core/Switch";
 import TextEditing from "./mst-mui-table/inline/text-editing/TextEditing";
-import Slider from "@material-ui/lab/Slider";
+import { BulkAction } from "./mst-mui-table/models/BulkAction";
+import { ButtonAction } from "./mst-mui-table/models/ButtonAction";
+import { ColumnList } from "./mst-mui-table/models/ColumnList";
+import { Data } from "./mst-mui-table/models/Data";
+import { Filter } from "./mst-mui-table/models/Filter";
+import { TableModel } from "./mst-mui-table/models/TableModel";
+import { Typography } from "@material-ui/core";
+import { columnBuilder } from "./mst-mui-table/models/Column";
+import { observer } from "mobx-react";
 
 const FatFilter = ({ checked, onFatFilterChange }) => {
   return (
     <div style={{ padding: 12 }}>
-      <Typography>Show low fat only (below 50g)</Typography>
+      <Typography>Fat below 50g</Typography>
       <Switch checked={checked} onChange={onFatFilterChange} />
     </div>
   );
@@ -27,31 +26,27 @@ const FatFilter = ({ checked, onFatFilterChange }) => {
 const CaloriesFilter = ({ checked, onCaloriesFilterChange }) => {
   return (
     <div style={{ padding: 12 }}>
-      <Typography>Show low calories only (below 50)</Typography>
+      <Typography>Calories below 50</Typography>
       <Switch checked={checked} onChange={onCaloriesFilterChange} />
     </div>
   );
 };
 
-const SliderFilter = ({ value, onChange }) => {
-  return <Slider value={value} onChange={onChange} />;
-};
-
 class App extends React.Component {
   createFatFilter = () => {
-    const fatFilter = Filter.create({ id: "fatFilter" });
-    fatFilter.setRules(data => data.getFieldValue("fat") < 50);
+    const fatFilter = Filter.create({ id: "fatFilter", value: true });
+    fatFilter.setRules((data, value) => (value ? data.getFieldValue("fat") < 50 : true));
     return fatFilter;
   };
 
   createCaloriesFilter = () => {
-    const caloriesFilter = Filter.create({ id: "caloriesFilter" });
-    caloriesFilter.setRules(data => data.getFieldValue("calories") < 50);
+    const caloriesFilter = Filter.create({ id: "caloriesFilter", value: false });
+    caloriesFilter.setRules((data, value) => (value ? data.getFieldValue("calories") < 50 : true));
     return caloriesFilter;
   };
 
   createSearchFilter = () => {
-    const searchFilter = Filter.create({ id: "searchFilter" });
+    const searchFilter = Filter.create({ id: "searchFilter", value: "" });
     searchFilter.setRules((data, value) => {
       const dessert = data.getFieldValue("dessert").toLowerCase();
       return dessert.toLowerCase().indexOf(value) > -1;
@@ -60,10 +55,10 @@ class App extends React.Component {
   };
 
   createSliderFilter = () => {
-    const sliderFilter = Filter.create({ id: "sliderFilter" });
+    const sliderFilter = Filter.create({ id: "sliderFilter", value: 100 });
     sliderFilter.setRules((data, value) => {
-      console.log(this.sliderFilterValue);
-      return true;
+      const carbs = data.getFieldValue("carbs");
+      return carbs < value;
     });
     return sliderFilter;
   };
@@ -111,8 +106,8 @@ class App extends React.Component {
 
     this.tableModel.addFilter(this.createFatFilter());
     this.tableModel.addFilter(this.createCaloriesFilter());
-    this.tableModel.addFilter(this.createSliderFilter());
     this.tableModel.addFilter(this.createSearchFilter());
+    this.tableModel.addFilter(this.createSliderFilter());
 
     for (let i = 0; i < 30; i++) {
       this.tableModel.add(this.createDummyData(`${i}`));
@@ -155,18 +150,11 @@ class App extends React.Component {
   };
 
   handleFatFilterChange = (event, checked) => {
-    if (checked) {
-      this.tableModel.addFilter(this.createFatFilter());
-    } else {
-      this.tableModel.removeFilter("fatFilter");
-    }
+    this.tableModel.getFilter("fatFilter").update(checked);
   };
+
   handleCaloriesFilterChange = (event, checked) => {
-    if (checked) {
-      this.tableModel.addFilter(this.createCaloriesFilter());
-    } else {
-      this.tableModel.removeFilter("caloriesFilter");
-    }
+    this.tableModel.getFilter("caloriesFilter").update(checked);
   };
 
   handleSeachValueChange = value => {
@@ -174,14 +162,13 @@ class App extends React.Component {
   };
 
   handleSliderFilterChange = (event, value) => {
-    this.sliderFilterValueUpdate(value);
     this.tableModel.getFilter("sliderFilter").update(value);
   };
 
   render() {
     return (
       <div style={{ display: "flex", justifyContent: "center", paddingTop: 24 }}>
-        <div style={{ width: 940 }}>
+        <div style={{ width: "100%" }}>
           <Typography variant="title">{`${
             this.tableModel.numRowCount
           } Nutrition items`}</Typography>
@@ -197,20 +184,20 @@ class App extends React.Component {
               />
             }
             slotForFilterContent={
-              <React.Fragment>
-                <FatFilter
-                  checked={Boolean(this.tableModel.getFilter("fatFilter").value)}
-                  onFatFilterChange={this.handleFatFilterChange}
-                />
-                <CaloriesFilter
-                  checked={Boolean(this.tableModel.getFilter("caloriesFilter").value)}
-                  onCaloriesFilterChange={this.handleCaloriesFilterChange}
-                />
+              <div style={{ width: 400 }}>
                 <SliderFilter
                   value={this.tableModel.getFilter("sliderFilter").value}
                   onChange={this.handleSliderFilterChange}
                 />
-              </React.Fragment>
+                <FatFilter
+                  checked={this.tableModel.getFilter("fatFilter").value}
+                  onFatFilterChange={this.handleFatFilterChange}
+                />
+                <CaloriesFilter
+                  checked={this.tableModel.getFilter("caloriesFilter").value}
+                  onCaloriesFilterChange={this.handleCaloriesFilterChange}
+                />
+              </div>
             }
           />
         </div>
