@@ -1,9 +1,12 @@
 import React from "react";
 
+// Components
+import Search from "./components/Search";
+import SliderFilter from "./components/SliderFilter";
+import BooleanFilter from "./components/BooleanFilter";
+
+// Mst-mui-table
 import MstMuiTable from "./mst-mui-table/views/MstMuiTable";
-import Search from "./mst-mui-table/views/components/Search";
-import SliderFilter from "./mst-mui-table/views/components/SliderFilter";
-import Switch from "@material-ui/core/Switch";
 import TextEditing from "./mst-mui-table/inline/text-editing/TextEditing";
 import { BulkAction } from "./mst-mui-table/models/BulkAction";
 import { ButtonAction } from "./mst-mui-table/models/ButtonAction";
@@ -11,10 +14,16 @@ import { ColumnList } from "./mst-mui-table/models/ColumnList";
 import { Data } from "./mst-mui-table/models/Data";
 import { Filter } from "./mst-mui-table/models/Filter";
 import { TableModel } from "./mst-mui-table/models/TableModel";
-import { Typography } from "@material-ui/core";
 import { columnBuilder } from "./mst-mui-table/models/Column";
-import { observer } from "mobx-react";
+
+// Material-ui
+import { Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
+
+// MobX
+import { observer } from "mobx-react";
+
+// Filter id constants
 const FAT_FILTER = "fatFilter";
 const CALORIES_FILTER = "caloriesFilter";
 const SEARCH_FILTER = "searchFilter";
@@ -22,24 +31,8 @@ const SLIDER_FILTER = "sliderFilter";
 
 const dessertNames = ["Frozen yoghurt", "Cupcake", "Donut", "Eclair", "Gingerbread"];
 
-const FatFilter = ({ checked, onFatFilterChange }) => {
-  return (
-    <div>
-      <Typography>Fat below 50g</Typography>
-      <Switch checked={checked} onChange={onFatFilterChange} />
-    </div>
-  );
-};
-const CaloriesFilter = ({ checked, onCaloriesFilterChange }) => {
-  return (
-    <div>
-      <Typography>Calories below 50</Typography>
-      <Switch checked={checked} onChange={onCaloriesFilterChange} />
-    </div>
-  );
-};
-
 class App extends React.Component {
+  // Create filters with default values
   createFatFilter = () => {
     const fatFilter = Filter.create({ id: FAT_FILTER, value: false });
     fatFilter.setRules((data, value) => (value ? data.getFieldValue("fat") < 50 : true));
@@ -205,13 +198,16 @@ class App extends React.Component {
                   value={this.tableModel.getFilter(SLIDER_FILTER).value}
                   onChange={this.handleSliderFilterChange}
                 />
-                <FatFilter
+                <BooleanFilter
+                  title="Fat below 50g"
                   checked={this.tableModel.getFilter(FAT_FILTER).value}
-                  onFatFilterChange={this.handleFatFilterChange}
+                  onChange={this.handleFatFilterChange}
                 />
-                <CaloriesFilter
+
+                <BooleanFilter
+                  title="Calories below 50g"
                   checked={this.tableModel.getFilter(CALORIES_FILTER).value}
-                  onCaloriesFilterChange={this.handleCaloriesFilterChange}
+                  onChange={this.handleCaloriesFilterChange}
                 />
                 <Button onClick={this.handleResetAllButtonClick}>Reset all</Button>
               </div>
