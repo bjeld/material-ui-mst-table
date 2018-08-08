@@ -199,13 +199,13 @@ class App extends React.Component {
                   onChange={this.handleSliderFilterChange}
                 />
                 <BooleanFilter
-                  title="Fat below 50g"
+                  title="Fat < 50g"
                   checked={this.tableModel.getFilter(FAT_FILTER).value}
                   onChange={this.handleFatFilterChange}
                 />
 
                 <BooleanFilter
-                  title="Calories below 50g"
+                  title="Calories < 50g"
                   checked={this.tableModel.getFilter(CALORIES_FILTER).value}
                   onChange={this.handleCaloriesFilterChange}
                 />
