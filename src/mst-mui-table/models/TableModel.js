@@ -74,10 +74,10 @@ export const TableModel = types
       self.order = value;
     },
     selectAll() {
-      self.dataProvider.forEach(data => (data.isSelected = true));
+      self.filtered.forEach(data => (data.isSelected = true));
     },
     deselectAll() {
-      self.dataProvider.forEach(data => (data.isSelected = false));
+      self.filtered.forEach(data => (data.isSelected = false));
     },
     /**
      * A filter is just a function that return true or false
