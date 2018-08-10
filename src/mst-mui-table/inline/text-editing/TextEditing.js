@@ -5,8 +5,9 @@ import Popover from "@material-ui/core/Popover";
 import Typography from "@material-ui/core/Typography";
 import { Paper, TextField } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
-import { observable, action } from "mobx";
+import { observable, action, decorate } from "mobx";
 import { observer } from "mobx-react";
+import EditIcon from "@material-ui/icons/Edit";
 
 const styles = theme => ({
   paper: {
@@ -16,15 +17,23 @@ const styles = theme => ({
     backgroundColor: "#FAFAFA",
     minWidth: 300
   },
-  buttonNoValue: {
-    color: "#ff9900"
-  },
   popover: {
     marginTop: 1
-  }
+  },
+  root: {
+    flex: 1,
+    margin: 0,
+    padding: 0,
+    display: "flex",
+    justifyContent: "space-between"
+  },
+  focusVisible: {}
 });
 
 class TextEditing extends React.Component {
+  isFocused = false;
+  isFocusedUpdate = value => (this.isFocused = value);
+
   constructor(props) {
     super(props);
     this.xxx = React.createRef();
@@ -52,7 +61,6 @@ class TextEditing extends React.Component {
 
   handleButtonClick = action(() => {
     this.currentState.open = true;
-    this.currentState.currentValue = this.props.value;
   });
 
   handleChange = action(e => {
@@ -60,6 +68,12 @@ class TextEditing extends React.Component {
   });
 
   handleKeyDown = e => {
+    if (e.keyCode === 9) {
+      e.preventDefault();
+      this.props.onValueChanged(this.currentState.currentValue);
+      this.currentState.open = false;
+    }
+
     if (e.key.toLowerCase() === "enter") {
       this.props.onValueChanged(this.currentState.currentValue);
       this.currentState.open = false;
@@ -67,7 +81,16 @@ class TextEditing extends React.Component {
   };
 
   handleFocus = e => {
+    this.currentState.currentValue = this.props.value;
     e.currentTarget.setSelectionRange(0, -1);
+  };
+
+  handleRootFocus = e => {
+    this.isFocusedUpdate(true);
+  };
+
+  handleRootBlur = e => {
+    this.isFocusedUpdate(false);
   };
 
   handleButtonBaseFocus = e => {
@@ -81,6 +104,10 @@ class TextEditing extends React.Component {
     window.onkeypress = undefined;
   };
 
+  handleBlur = e => {
+    e.preventDefault();
+  };
+
   render() {
     const { value, classes } = this.props;
 
@@ -88,19 +115,26 @@ class TextEditing extends React.Component {
 
     return (
       <Fragment>
-        <ButtonBase
-          onFocus={this.handleButtonBaseFocus}
-          onBlur={this.handleButtonBaseBlur}
-          buttonRef={node => {
-            this.anchorEl = node;
-          }}
-          focusRipple
-          onClick={this.handleButtonClick}
-        >
-          <Typography color={hasValue ? "default" : "textSecondary"} align="left" noWrap>
-            {value && value !== "" ? value : "Add a name"}
-          </Typography>
-        </ButtonBase>
+        <div className={classes.root} onFocus={this.handleRootFocus} onBlur={this.handleRootBlur}>
+          <ButtonBase
+            onFocus={this.handleButtonBaseFocus}
+            onBlur={this.handleButtonBaseBlur}
+            buttonRef={node => {
+              this.anchorEl = node;
+            }}
+            focusRipple={false}
+            onClick={this.handleButtonClick}
+            classes={{ focusVisible: classes.focusVisible }}
+          >
+            <Typography color={hasValue ? "default" : "textSecondary"} align="left" noWrap>
+              {value && value !== "" ? value : "Add a name"}
+            </Typography>
+          </ButtonBase>
+
+          <div style={{ opacity: this.isFocused ? 1 : 0 }}>
+            <EditIcon />
+          </div>
+        </div>
         <Popover
           className={classes.popover}
           onClose={this.handleClose}
@@ -124,6 +158,7 @@ class TextEditing extends React.Component {
               value={this.currentState.currentValue}
               onChange={this.handleChange}
               onKeyDown={this.handleKeyDown}
+              onBlur={this.handleBlur}
             />
           </Paper>
         </Popover>
@@ -131,5 +166,10 @@ class TextEditing extends React.Component {
     );
   }
 }
+
+decorate(TextEditing, {
+  isFocused: observable,
+  isFocusedUpdate: action
+});
 
 export default withStyles(styles)(observer(TextEditing));
