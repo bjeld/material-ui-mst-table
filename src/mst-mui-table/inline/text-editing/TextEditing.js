@@ -21,13 +21,18 @@ const styles = theme => ({
     marginTop: 1
   },
   root: {
+    height: "100%",
     flex: 1,
     margin: 0,
     padding: 0,
     display: "flex",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    cursor: "pointer"
   },
-  focusVisible: {}
+  focusVisible: {},
+  icon: {
+    fontSize: 20
+  }
 });
 
 class TextEditing extends React.Component {
@@ -36,19 +41,17 @@ class TextEditing extends React.Component {
 
   constructor(props) {
     super(props);
-    this.xxx = React.createRef();
+    this.anchorEl = React.createRef();
   }
 
   componentDidMount() {
-    this.xxx = ReactDOM.findDOMNode(this).parentNode;
+    this.anchorEl = ReactDOM.findDOMNode(this).parentNode;
   }
 
   currentState = observable({
     open: false,
     currentValue: ""
   });
-
-  anchorEl = null;
 
   handleClose = e => {
     this.currentState.open = false;
@@ -108,6 +111,14 @@ class TextEditing extends React.Component {
     e.preventDefault();
   };
 
+  handleMouseOver = e => {
+    this.isFocusedUpdate(true);
+  };
+
+  handleMouseOut = e => {
+    this.isFocusedUpdate(false);
+  };
+
   render() {
     const { value, classes } = this.props;
 
@@ -115,15 +126,18 @@ class TextEditing extends React.Component {
 
     return (
       <Fragment>
-        <div className={classes.root} onFocus={this.handleRootFocus} onBlur={this.handleRootBlur}>
+        <div
+          className={classes.root}
+          onFocus={this.handleRootFocus}
+          onBlur={this.handleRootBlur}
+          onMouseOver={this.handleMouseOver}
+          onMouseOut={this.handleMouseOut}
+          onClick={this.handleButtonClick}
+        >
           <ButtonBase
             onFocus={this.handleButtonBaseFocus}
             onBlur={this.handleButtonBaseBlur}
-            buttonRef={node => {
-              this.anchorEl = node;
-            }}
             focusRipple={false}
-            onClick={this.handleButtonClick}
             classes={{ focusVisible: classes.focusVisible }}
           >
             <Typography color={hasValue ? "default" : "textSecondary"} align="left" noWrap>
@@ -132,13 +146,13 @@ class TextEditing extends React.Component {
           </ButtonBase>
 
           <div style={{ opacity: this.isFocused ? 1 : 0 }}>
-            <EditIcon />
+            <EditIcon className={classes.icon} />
           </div>
         </div>
         <Popover
           className={classes.popover}
           onClose={this.handleClose}
-          anchorEl={this.xxx}
+          anchorEl={this.anchorEl}
           open={this.currentState.open}
           elevation={3}
           anchorOrigin={{
@@ -150,7 +164,7 @@ class TextEditing extends React.Component {
             horizontal: "left"
           }}
         >
-          <Paper className={classes.paper}>
+          <div className={classes.paper}>
             <TextField
               autoFocus
               onFocus={this.handleFocus}
@@ -160,7 +174,7 @@ class TextEditing extends React.Component {
               onKeyDown={this.handleKeyDown}
               onBlur={this.handleBlur}
             />
-          </Paper>
+          </div>
         </Popover>
       </Fragment>
     );
