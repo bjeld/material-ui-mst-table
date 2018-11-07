@@ -1,5 +1,6 @@
 {
-  "name": "material-ui-mst-table",
+  "name": "material-ui-mst-table-example",
+  "homepage": "https://bjeld.github.io/material-ui-mst-table",
   "version": "0.5.3",
   "description": "Material UI Table powered by MobX State Tree",
   "author": "bjeld",
