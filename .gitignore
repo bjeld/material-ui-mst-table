@@ -18,7 +18,10 @@ dist
 
 package-lock.json
 
-example
+example/node_modules
+example/build
+example/yarn.lock
+
 
 
 npm-debug.log*
