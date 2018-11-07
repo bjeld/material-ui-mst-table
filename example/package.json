@@ -1,9 +1,9 @@
 {
-  "homepage": "https://bjeld.github.io/material-ui-mst-table",
-  "name": "material-ui-mst-table-example",
-  "version": "0.0.0",
+  "homepage": "https://bjeld.github.io/material-ui-mst-table/",
+  "name": "material-ui-mst-table",
+  "version": "0.0.1",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@material-ui/core": "^3.4.0",
     "@material-ui/icons": "^3.0.1",
