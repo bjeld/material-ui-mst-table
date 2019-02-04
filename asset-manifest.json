@@ -1,11 +1,6 @@
 {
-  "main.js": "/material-ui-mst-table/static/js/main.5fc29360.chunk.js",
-  "main.js.map": "/material-ui-mst-table/static/js/main.5fc29360.chunk.js.map",
-  "static/js/1.299d5a98.chunk.js": "/material-ui-mst-table/static/js/1.299d5a98.chunk.js",
-  "static/js/1.299d5a98.chunk.js.map": "/material-ui-mst-table/static/js/1.299d5a98.chunk.js.map",
-  "runtime~main.js": "/material-ui-mst-table/static/js/runtime~main.68b68518.js",
-  "runtime~main.js.map": "/material-ui-mst-table/static/js/runtime~main.68b68518.js.map",
-  "index.html": "/material-ui-mst-table/index.html",
-  "precache-manifest.5f159f973ec05f7b99d26e359c75c003.js": "/material-ui-mst-table/precache-manifest.5f159f973ec05f7b99d26e359c75c003.js",
-  "service-worker.js": "/material-ui-mst-table/service-worker.js"
+  "main.css": "static/css/main.fbb63d22.css",
+  "main.css.map": "static/css/main.fbb63d22.css.map",
+  "main.js": "static/js/main.4117b3e8.js",
+  "main.js.map": "static/js/main.4117b3e8.js.map"
 }
