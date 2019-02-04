@@ -1,6 +1,6 @@
 {
   "name": "material-ui-mst-table",
-  "version": "1.0.0",
+  "version": "0.5.5",
   "description": "Material-ui Table controlled by Mobx State Tree",
   "author": "bjeld",
   "license": "MIT",
@@ -24,7 +24,12 @@
   "peerDependencies": {
     "prop-types": "^15.5.4",
     "react": "^15.0.0 || ^16.0.0",
-    "react-dom": "^15.0.0 || ^16.0.0"
+    "react-dom": "^15.0.0 || ^16.0.0",
+    "@material-ui/core": "^3.9.2",
+    "@material-ui/icons": "^3.0.2",
+    "mobx": "^5.9.0",
+    "mobx-react": "^5.4.3",
+    "mobx-state-tree": "^3.10.2"
   },
   "devDependencies": {
     "@svgr/rollup": "^2.4.1",
@@ -57,5 +62,6 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {}
 }
