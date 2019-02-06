@@ -45,18 +45,16 @@ class KeyValueTable extends React.Component {
       columnList: ColumnList.create({
         showCheckbox: false,
         columns: [
-          columnBuilder("key", "Key", value => <span style={{fontWeight: 500}}>{value}</span>),
+          columnBuilder("key", "Key", value => <div style={{fontWeight: 500}}>{value}</div>),
           columnBuilder("value", "Value", (value, data) => {
             return(
-              <div style={{ width: 250}}>
-                <CellTextEditable
-                  value={value}
-                  onValueChanged={newValue => {
-                    // optimistic update
-                    data.setFieldValue("value", newValue);
-                  }}
-                />
-              </div>
+              <CellTextEditable
+                value={value}
+                onValueChanged={newValue => {
+                  // optimistic update
+                  data.setFieldValue("value", newValue);
+                }}
+              />
             )
           })
         ]
