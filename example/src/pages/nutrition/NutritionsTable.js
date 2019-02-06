@@ -199,6 +199,7 @@ class Table_Nutritions extends React.Component {
             onRowAction={this.handleRowAction}
             slotForLeftToolbarArea={
               <Search
+                placeholder="Search for name"
                 value={this.tableModel.getFilter(SEARCH_FILTER).value}
                 onValueChange={this.handleSearchValueChange}
               />

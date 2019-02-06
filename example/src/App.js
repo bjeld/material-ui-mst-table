@@ -4,8 +4,8 @@ import Main from "./scaffold/Main";
 import KeyValueTable from "./pages/keyvalue/KeyValueTable";
 
 const Tables = {
-  0: <KeyValueTable />,
-  1: <NutritionsTable />
+  0: <NutritionsTable />,
+  1: <KeyValueTable />
 }
 
 class App extends React.Component {

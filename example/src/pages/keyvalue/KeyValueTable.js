@@ -94,7 +94,7 @@ class KeyValueTable extends React.Component {
           <MstMuiTable tableModel={this.tableModel} 
             slotForLeftToolbarArea={
               <Search
-                placeholder="Search on value"
+                placeholder="Search for value"
                 value={this.tableModel.getFilter(SEARCH_FILTER).value}
                 onValueChange={this.handleSearchValueChange}
               />

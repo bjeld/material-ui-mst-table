@@ -31,8 +31,8 @@ class Header extends React.Component{
         <Tabs value={this.selectedIndex} textColor="inherit" onChange={
           (event, newValue) => this.updateSelectedIndex(newValue)
         }>
-          <Tab textColor="inherit" label="Key Value" />
           <Tab textColor="inherit" label="Nutritions" />
+          <Tab textColor="inherit" label="Key Value" />
         </Tabs>
       </AppBar>
     </React.Fragment>
