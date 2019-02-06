@@ -2,6 +2,8 @@
 
 > Material-ui Table controlled by Mobx State Tree
 
+![](demo.gif)
+
 [![NPM](https://img.shields.io/npm/v/material-ui-mst-table.svg)](https://www.npmjs.com/package/material-ui-mst-table) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
