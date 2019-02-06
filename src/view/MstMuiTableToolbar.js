@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import classNames from "classnames";
 import { lighten } from "@material-ui/core/styles/colorManipulator";
 import { observer } from "mobx-react";
-import withStyles from "@material-ui/core/styles/withStyles";
+import { withStyles } from "@material-ui/core/styles";
 import BulkActionsView from "./components/BulkActionsView";
 import ButtonActionsView from "./components/ButtonActionsView";
 import Divider from "@material-ui/core/Divider";
@@ -18,18 +18,21 @@ const styles = theme => ({
   highlight:
     theme.palette.type === "light"
       ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85)
+          color: theme.palette.primary.main,
+          backgroundColor: lighten(theme.palette.primary.light, 0.85)
         }
       : {
           color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark
+          backgroundColor: theme.palette.primary.dark
         },
   spacer: {
     flex: "1 1 100%"
   },
+  space: {
+    width: 10
+  },
   actions: {
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.primary,
     display: "flex",
     alignItems: "center"
   },
@@ -64,6 +67,7 @@ const MstMuiTableToolbar = ({
             <Typography color="inherit" variant="subheading">
               {numSelected} selected
             </Typography>
+            <div className={classes.space} />
             <BulkActionsView bulkActions={bulkActions} onBulkAction={onBulkAction} />
           </React.Fragment>
         ) : (

@@ -16,9 +16,9 @@ export const Column = types
      */
     hidden: types.boolean,
     /**
-     * If true, the content in the column is aligned right
+     *
      */
-    numeric: types.boolean,
+    align: types.enumeration("ColumnAlignEnum", ["left", "right", "center", "inherit", "justify"]),
     /**
      * If true, the column header can be clicked to sort the content
      */
@@ -37,21 +37,12 @@ export const Column = types
     }
   }));
 
-export const columnBuilder = (
-  fieldName,
-  fieldLabel,
-  cellRendererFunc,
-  options = {}
-) => {
-  const fitToContent = options.hasOwnProperty("fitToContent")
-    ? options.fitToContent
-    : false;
+export const columnBuilder = (fieldName, fieldLabel, cellRendererFunc, options = {}) => {
+  const fitToContent = options.hasOwnProperty("fitToContent") ? options.fitToContent : false;
   const hideable = options.hasOwnProperty("hideable") ? options.hideable : true;
   const hidden = options.hasOwnProperty("hidden") ? options.hidden : false;
-  const numeric = options.hasOwnProperty("numeric") ? options.numeric : false;
-  const sortable = options.hasOwnProperty("sortable")
-    ? options.sortable
-    : false;
+  const align = options.hasOwnProperty("align") ? options.align : "left";
+  const sortable = options.hasOwnProperty("sortable") ? options.sortable : false;
   const columnCountData = options.hasOwnProperty("columnCountData")
     ? options.columnCountData
     : undefined;
@@ -61,7 +52,7 @@ export const columnBuilder = (
     fitToContent,
     hideable,
     hidden,
-    numeric,
+    align,
     sortable,
     columnCountData
   });

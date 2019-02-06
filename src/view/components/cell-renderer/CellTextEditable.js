@@ -4,7 +4,7 @@ import ButtonBase from "@material-ui/core/ButtonBase";
 import Popover from "@material-ui/core/Popover";
 import Typography from "@material-ui/core/Typography";
 import { TextField } from "@material-ui/core";
-import withStyles from "@material-ui/core/styles/withStyles";
+import { withStyles } from "@material-ui/core/styles";
 import { observable, action, decorate } from "mobx";
 import { observer } from "mobx-react";
 import EditIcon from "@material-ui/icons/Edit";

@@ -5,7 +5,7 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 import IconButton from "@material-ui/core/IconButton";
 import Popover from "@material-ui/core/Popover";
 import Tooltip from "@material-ui/core/Tooltip";
-import withStyles from "@material-ui/core/styles/withStyles";
+import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => {
   //console.log(theme);

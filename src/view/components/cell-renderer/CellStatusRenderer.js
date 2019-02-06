@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import withStyles from "@material-ui/core/styles/withStyles";
+import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
   success: {
@@ -10,8 +10,8 @@ const styles = theme => ({
     padding: "4px 12px"
   },
   warn: {
-    backgroundColor: "#FCF3CF",
-    color: "#D9B00D",
+    backgroundColor: "#FEF9E7",
+    color: "#C19C0B",
     borderRadius: 12,
     padding: "4px 12px"
   },

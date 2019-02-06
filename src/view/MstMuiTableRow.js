@@ -11,14 +11,12 @@ let shiftKey = false;
 
 class MstMuiTableRow extends React.Component {
   handleClick = event => (shiftKey = event.shiftKey);
-  handleChange = (event, checked) =>
-    this.props.data.updateIsSelected(checked, shiftKey);
+  handleChange = (event, checked) => this.props.data.updateIsSelected(checked, shiftKey);
 
   render() {
     const { data, columnList, rowActions, onRowAction } = this.props;
     return (
       <TableRow
-        hover
         selected={data.isSelected}
         aria-checked={data.isSelected}
         role="checkbox"
@@ -27,6 +25,7 @@ class MstMuiTableRow extends React.Component {
         {columnList.showCheckbox && (
           <TableCell padding="checkbox">
             <Checkbox
+              color="primary"
               checked={data.isSelected}
               onClick={this.handleClick}
               onChange={this.handleChange}
@@ -44,20 +43,12 @@ class MstMuiTableRow extends React.Component {
         ))}
 
         {rowActions.length > 0 && (
-          <TableCell numeric>
+          <TableCell align="right">
             {rowActions.length === 1 && (
-              <SingleRowAction
-                data={data}
-                rowAction={rowActions[0]}
-                onRowAction={onRowAction}
-              />
+              <SingleRowAction data={data} rowAction={rowActions[0]} onRowAction={onRowAction} />
             )}
             {rowActions.length > 1 && (
-              <MultipleRowActions
-                data={data}
-                rowActions={rowActions}
-                onRowAction={onRowAction}
-              />
+              <MultipleRowActions data={data} rowActions={rowActions} onRowAction={onRowAction} />
             )}
           </TableCell>
         )}

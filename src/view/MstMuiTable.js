@@ -6,7 +6,7 @@ import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import Paper from "@material-ui/core/Paper";
 import { observer } from "mobx-react";
-import withStyles from "@material-ui/core/styles/withStyles";
+import { withStyles } from "@material-ui/core/styles";
 import TablePagination from "@material-ui/core/TablePagination";
 
 const styles = theme => ({

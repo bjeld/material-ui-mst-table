@@ -6,7 +6,7 @@ class MstMuiColumn extends React.Component {
   render() {
     const { column, value, data, classes, ...other } = this.props;
     return (
-      <TableCell numeric={column.numeric} {...other}>
+      <TableCell align={column.align} {...other}>
         {column.renderer(value, data)}
       </TableCell>
     );

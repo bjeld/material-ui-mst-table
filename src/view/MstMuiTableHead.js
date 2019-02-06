@@ -27,6 +27,7 @@ const MstMuiTableHead = ({
         {columnList.showCheckbox && (
           <TableCell padding="checkbox">
             <Checkbox
+              color="primary"
               indeterminate={numSelected > 0 && numSelected < rowCount}
               checked={rowCount > 0 && numSelected === rowCount}
               onChange={onSelectAllClick}
@@ -36,15 +37,11 @@ const MstMuiTableHead = ({
         {columnList.visibleColumns.map((column, i) => (
           <TableCell
             key={`MstMuiTableHead_${column.fieldName}`}
-            numeric={column.numeric}
+            align={column.align}
             padding={columnList.showCheckbox && i === 0 ? "none" : "default"}
             sortDirection={orderBy === column.fieldName ? order : false}
           >
-            <Tooltip
-              title="Sort"
-              placement={column.numeric ? "bottom-end" : "bottom-start"}
-              enterDelay={300}
-            >
+            <Tooltip title="Sort" enterDelay={300}>
               <TableSortLabel
                 active={orderBy === column.fieldName}
                 direction={order}
@@ -56,7 +53,7 @@ const MstMuiTableHead = ({
           </TableCell>
         ))}
 
-        {rowActions.length > 0 && <TableCell numeric>Actions</TableCell>}
+        {rowActions.length > 0 && <TableCell align="right">Actions</TableCell>}
       </TableRow>
     </TableHead>
   );
