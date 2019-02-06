@@ -75,6 +75,8 @@ const styles = {
   }
 };
 
+
+
 class Main extends React.Component {
   render() {
     const { classes } = this.props;
@@ -83,7 +85,7 @@ class Main extends React.Component {
         <div className={classes.root}>
           <CssBaseline />
           <div className={classes.appContent}>
-            <Header />
+            <Header onTabChange={this.props.onTapChange}/>
             <main className={classes.mainContent}>{this.props.children}</main>
           </div>
         </div>

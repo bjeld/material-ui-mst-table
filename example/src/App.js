@@ -1,12 +1,29 @@
 import React from "react";
-import TableNutritions from "./pages/nutrition/TableNutritions";
+import NutritionsTable from "./pages/nutrition/NutritionsTable";
 import Main from "./scaffold/Main";
+import KeyValueTable from "./pages/keyvalue/KeyValueTable";
+
+const Tables = {
+  0: <KeyValueTable />,
+  1: <NutritionsTable />
+}
 
 class App extends React.Component {
+
+  state = {
+    selectedTabIndex: 0
+  }
+
+  handleTapChange = index => {
+    this.setState({selectedTabIndex: index})
+  }
+
   render() {
     return (
-      <Main>
-        <TableNutritions />
+      <Main onTapChange={this.handleTapChange}>
+        {
+          Tables[this.state.selectedTabIndex]
+        }
       </Main>
     );
   }

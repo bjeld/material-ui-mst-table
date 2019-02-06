@@ -71,13 +71,8 @@ class CellTextEditable extends React.Component {
   });
 
   handleKeyDown = e => {
-    if (e.keyCode === 9) {
+    if (e.keyCode === 13) {
       e.preventDefault();
-      this.props.onValueChanged(this.currentState.currentValue);
-      this.currentState.open = false;
-    }
-
-    if (e.key.toLowerCase() === "enter") {
       this.props.onValueChanged(this.currentState.currentValue);
       this.currentState.open = false;
     }

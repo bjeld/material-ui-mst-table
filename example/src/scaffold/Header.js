@@ -5,9 +5,21 @@ import Tabs from "@material-ui/core/Tabs";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 
-const Header = props => {
-  return (
-    <React.Fragment>
+import { observer } from "mobx-react";
+import { decorate, action, observable } from "mobx";
+
+class Header extends React.Component{
+
+  selectedIndex = 0;
+
+  updateSelectedIndex = index => {
+    this.selectedIndex = index;
+    this.props.onTabChange(index);
+  }
+
+  render() {
+    return (
+      <React.Fragment>
       <AppBar component="div" color="primary" position="static" elevation={0}>
         <Toolbar>
           <Typography color="inherit" variant="h5">
@@ -16,12 +28,22 @@ const Header = props => {
         </Toolbar>
       </AppBar>
       <AppBar component="div" color="primary" position="sticky" elevation={1}>
-        <Tabs value={0} textColor="inherit">
+        <Tabs value={this.selectedIndex} textColor="inherit" onChange={
+          (event, newValue) => this.updateSelectedIndex(newValue)
+        }>
+          <Tab textColor="inherit" label="Key Value" />
           <Tab textColor="inherit" label="Nutritions" />
         </Tabs>
       </AppBar>
     </React.Fragment>
-  );
+    );
+  }
 };
 
-export default Header;
+decorate(Header, {
+  selectedIndex: observable,
+  updateSelectedIndex: action
+})
+
+
+export default observer(Header);

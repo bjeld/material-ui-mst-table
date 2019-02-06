@@ -189,7 +189,7 @@ class Table_Nutritions extends React.Component {
     return (
       <div style={{ display: "flex", justifyContent: "center", paddingTop: 24 }}>
         <div style={{ width: 1024 }}>
-          <Typography variant="subheading">{`${
+          <Typography variant="h6">{`${
             this.tableModel.numRowCount
           } Nutrition items`}</Typography>
           <MstMuiTable
