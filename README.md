@@ -7,11 +7,11 @@
 [![NPM](https://img.shields.io/npm/v/material-ui-mst-table.svg)](https://www.npmjs.com/package/material-ui-mst-table) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Features
-⋅⋅1 Multi select using SHIFT+CLICK -> Event over pagination pages
-..2 Bulk Actions -> Actions that can be triggered for one or more selected items
-..3 Row Actions -> Actions that apear for each row
-..4 Filtering system for filtering the shown content
-..5 Custom cell renderers -> for example -> edit cell callout
+- Multi select using SHIFT+CLICK -> Event over pagination pages
+- Bulk Actions -> Actions that can be triggered for one or more selected items
+- Row Actions -> Actions that apear for each row
+- Filtering system for filtering the shown content
+- Custom cell renderers -> for example -> edit cell callout
 
 ## Install
 
