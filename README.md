@@ -8,8 +8,8 @@
 
 ## Features
 - Multi select using SHIFT+CLICK -> Event over pagination pages
-- Bulk Actions -> Actions that can be triggered for one or more selected items
-- Row Actions -> Actions that apear for each row
+- Bulk Actions -> Actions that can be triggered for one or more selected items(Apears in the table header area)
+- Row Actions -> Actions that apear for each row(Apears in the last table row)
 - Filtering system for filtering the shown content
 - Custom cell renderers -> for example -> edit cell callout
 
