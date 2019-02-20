@@ -33,6 +33,7 @@ class Header extends React.Component{
         }>
           <Tab textColor="inherit" label="Nutritions" />
           <Tab textColor="inherit" label="Key Value" />
+          <Tab textColor="inherit" label="Row Actions" />
         </Tabs>
       </AppBar>
     </React.Fragment>
