@@ -8,10 +8,10 @@
 
 ## Features
 - Multi select using SHIFT+CLICK -> Even across multiple paginated pages
-- Bulk Actions -> Actions that can be triggered for one or more selected items(Apears in the table header area)
-- Row Actions -> Actions that appear for each row(Apears in the last table row)
+- Bulk Actions -> Actions that can be triggered for one or more selected items(appears in the table header area)
+- Row Actions -> Actions for each row(appears in the last table row column)
 - Filtering system for filtering the shown content
-- Custom cell renderers -> for example -> edit cell callout
+- Custom cell renderers
 
 ## Install
 
