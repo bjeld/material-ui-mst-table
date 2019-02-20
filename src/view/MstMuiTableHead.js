@@ -53,7 +53,7 @@ const MstMuiTableHead = ({
           </TableCell>
         ))}
 
-        {rowActions.length > 0 && <TableCell align="right">Actions</TableCell>}
+        {rowActions.length > 0 && <TableCell align="right"></TableCell>}
       </TableRow>
     </TableHead>
   );
