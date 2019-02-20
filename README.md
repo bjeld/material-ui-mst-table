@@ -7,7 +7,7 @@
 [![NPM](https://img.shields.io/npm/v/material-ui-mst-table.svg)](https://www.npmjs.com/package/material-ui-mst-table) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Features
-- Multi select using SHIFT+CLICK -> Even over pagination pages
+- Multi select using SHIFT+CLICK -> Even over multiple paginated pages
 - Bulk Actions -> Actions that can be triggered for one or more selected items(Apears in the table header area)
 - Row Actions -> Actions that appear for each row(Apears in the last table row)
 - Filtering system for filtering the shown content
