@@ -1,18 +1,13 @@
 import React from "react";
 
-// MobX
 import { observer } from "mobx-react";
 
-// Fakedata
 import faker from "faker";
 
-// Components
 import Search from "../../components/Search";
 
-// Material-UI
 import { Typography } from "@material-ui/core";
 
-// material-ui-mst-table
 import {
   MstMuiTable,
   TableModel,
