@@ -1,15 +1,11 @@
 import React from "react";
 
-// Fakedata
 import faker from "faker";
 
-// Material-UI
 import { Typography } from "@material-ui/core";
 
-// Components
 import Search from "../../components/Search";
 
-// material-ui-mst-table
 import {
   MstMuiTable,
   TableModel,
@@ -20,7 +16,6 @@ import {
   Filter
 } from "material-ui-mst-table";
 
-// MobX
 import { observer } from "mobx-react";
 
 const SEARCH_FILTER = "searchFilter";
